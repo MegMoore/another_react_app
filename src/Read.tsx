@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react'
 import { baseUrl } from './App';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { User } from './Interfaces';
 
 
@@ -45,6 +45,8 @@ function Read() {
         <div className='mb-2'>
         <strong>Is Admin: {data?.isAdmin}</strong>
         </div>
+        <Link to={`/update/${id}`} className='btn btn-success'>Edit</Link>
+        <Link to={'/'} className='btn btn-primary ms-3' >Back</Link>
         </div> 
     </div>
   )
