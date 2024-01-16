@@ -24,8 +24,26 @@ function Read() {
         <div className='mb-2'>
           <strong>Username: {data?.username}</strong>
         </div>
-        <div>
+        <div className='mb-2'>
+          <strong>Password: {data?.password}</strong>
+        </div>
+        <div className='mb-2'>
         <strong>Firstname: {data?.firstname}</strong>
+        </div>
+        <div className='mb-2'>
+        <strong>Lastname: {data?.lastname}</strong>
+        </div>
+        <div className='mb-2'>
+        <strong>Phone: {data?.phone}</strong>
+        </div>
+        <div className='mb-2'>
+        <strong>Email: {data?.email}</strong>
+        </div>
+        <div className='mb-2'>
+        <strong>Is Reviewer: {data?.isReviewer}</strong>
+        </div>
+        <div className='mb-2'>
+        <strong>Is Admin: {data?.isAdmin}</strong>
         </div>
         </div> 
     </div>
