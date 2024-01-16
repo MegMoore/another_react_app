@@ -28,6 +28,8 @@ export const Home = () => {
             <th>Id</th>
             <th>FirstName</th>
             <th>LastName</th>
+            <th>Username</th>
+
           </tr>
         </thead>
         <tbody>
@@ -36,6 +38,7 @@ export const Home = () => {
               <td>{user.id}</td>
               <td>{user.firstname}</td>
               <td>{user.lastname}</td>
+              <td>{user.username}</td>
               <td>
                 <Link className="btn btn-sm btn-info me-2" to={`/read/${user.id}`}>Read</Link>
                 <button className="btn btn-sm btn-primary me-2">Edit</button>
