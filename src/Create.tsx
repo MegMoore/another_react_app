@@ -11,16 +11,16 @@ export const Create = () => {
     lastname: "",
     phone: "",
     email: "",
-    isreviewer: "",
-    isadmin: "",
+    isreviewer: false,
+    isadmin: false,
   });
 
   const navigate = useNavigate();
 
-  const handleSubmit = (event: { preventDefault: () => void }) => {
+  const handleSubmit = (event: { preventDefault: () => void; }) => {
     event.preventDefault();
     axios
-      .post(`${baseUrl}/api/users`)
+      .post(`${baseUrl}/api/users`, values)
       .then((res) => {
         console.log(res);
         navigate("/");
@@ -130,6 +130,4 @@ export const Create = () => {
     </div>
   );
 };
-function setUser(data: any): any {
-  throw new Error("Function not implemented.");
-}
+
