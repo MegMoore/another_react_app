@@ -1,5 +1,7 @@
+import axios from "axios";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { baseUrl } from "./App";
 
 export const Create = () => {
   const [values, setValues] = useState({
@@ -12,11 +14,25 @@ export const Create = () => {
     isreviewer: "",
     isadmin: "",
   });
+
+  const navigate = useNavigate();
+
+  const handleSubmit = (event: { preventDefault: () => void }) => {
+    event.preventDefault();
+    axios
+      .post(`${baseUrl}/api/users`)
+      .then((res) => {
+        console.log(res);
+        navigate("/");
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className="d-flex w-100 vh-100 justify-content-center align-items-center bg-light">
       <div className="w-50 border bg-white shadow px-5 pt-3 pb-5 rounded">
         <h1>Add a Kid</h1>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="mb-2">
             <label htmlFor="username">Username</label>
             <input
@@ -114,3 +130,6 @@ export const Create = () => {
     </div>
   );
 };
+function setUser(data: any): any {
+  throw new Error("Function not implemented.");
+}
