@@ -1,11 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { baseUrl } from "./App";
-import { User } from "./Interfaces";
 
 export const Update = () => {
-  const [data, setData] = useState<User>();
+ // const [data, setData] = useState<User>();
   const { id } = useParams();
   const [values, setValues] = useState({
     username: "",
@@ -15,19 +14,31 @@ export const Update = () => {
     phone: "",
     email: "",
   });
-
+  const navigate = useNavigate();
   useEffect(() => {
     axios
       .get(`${baseUrl}/api/users/${id}`)
-      .then((res) => setData(res.data))
+      .then((res) => {
+          setValues(res.data);
+      })
       .catch((err) => console.log(err));
   }, [id]);
+
+  const handleUpdate = (event: { preventDefault: () => void; }) => {
+    event.preventDefault();
+      axios.put(`${baseUrl}/api/users/${id}`, values)
+      .then((res) => {
+        console.log(res);
+        navigate("/");
+      })
+      .catch((err) => console.log(err));
+  }
 
   return (
     <div className="d-flex w-100 vh-100 justify-content-center align-items-center bg-light">
       <div className="w-50 border bg-white shadow px-5 pt-3 pb-5 rounded">
         <h1>Update Kid</h1>
-        <form>
+        <form onSubmit={handleUpdate}>
           <div className="mb-2">
             <label htmlFor="username">Username</label>
             <input
@@ -35,7 +46,7 @@ export const Update = () => {
               name="username"
               className="form-control"
               placeholder="Enter Username"
-              value={data?.username}
+              value={values.username}
               onChange={(e) =>
                 setValues({ ...values, username: e.target.value })
               }
@@ -48,7 +59,7 @@ export const Update = () => {
               name="password"
               className="form-control"
               placeholder="Enter Password"
-              value={data?.password}
+              value={values.password}
               onChange={(e) =>
                 setValues({ ...values, password: e.target.value })
               }
@@ -61,7 +72,7 @@ export const Update = () => {
               name="firstname"
               className="form-control"
               placeholder="Enter Firstname"
-              value={data?.firstname}
+              value={values.firstname}
               onChange={(e) =>
                 setValues({ ...values, firstname: e.target.value })
               }
@@ -74,7 +85,7 @@ export const Update = () => {
               name="lastName"
               className="form-control"
               placeholder="Enter Lastname"
-              value={data?.lastname}
+              value={values.lastname}
               onChange={(e) =>
                 setValues({ ...values, lastname: e.target.value })
               }
@@ -87,7 +98,7 @@ export const Update = () => {
               name="phone"
               className="form-control"
               placeholder="Enter Phone"
-              value={data?.phone}
+              value={values.phone}
               onChange={(e) => setValues({ ...values, phone: e.target.value })}
             />
           </div>
@@ -98,7 +109,7 @@ export const Update = () => {
               name="email"
               className="form-control"
               placeholder="Enter Email"
-              value={data?.email}
+              value={values.email}
               onChange={(e) => setValues({ ...values, email: e.target.value })}
             />
           </div>
