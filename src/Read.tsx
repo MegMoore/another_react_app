@@ -14,7 +14,7 @@ function Read() {
     axios.get(`${baseUrl}/api/users/${id}`)
     .then(res => setData(res.data))
     .catch(err => console.log(err));
-  })
+  }, [id])
   
 
   return (
