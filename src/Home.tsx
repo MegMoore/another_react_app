@@ -2,18 +2,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { baseUrl } from "./App";
 import { Link } from "react-router-dom";
+import {User} from './Interfaces'
 
-interface User {
-  id: number
-  username: string
-  password: string
-  firstname: string
-  lastname: string
-  phone: string
-  email: string
-  isReviewer: boolean
-  isAdmin: boolean
-}
 
 export const Home = () => {
   const [user, setUser] = useState<User[]>([]);
@@ -47,7 +37,7 @@ export const Home = () => {
               <td>{user.firstname}</td>
               <td>{user.lastname}</td>
               <td>
-                <button className="btn btn-sm btn-info me-2">Read</button>
+                <Link className="btn btn-sm btn-info me-2" to={`/read/${user.id}`}>Read</Link>
                 <button className="btn btn-sm btn-primary me-2">Edit</button>
                 <button className="btn btn-sm btn-danger">Delete</button>
               </td>
